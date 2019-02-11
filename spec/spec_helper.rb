@@ -30,11 +30,17 @@ require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/factories'
 require 'spree/testing_support/url_helpers'
 
+branch = ENV.fetch('SOLIDUS_BRANCH', 'master')
+if branch == 'master' || branch >= "v2.5"
+  ENV['FACTORY'] = 'FactoryBot'
+else
+  ENV['FACTORY'] = 'FactoryGirl'
+end
 # Requires factories defined in lib/solidus_payment_method_by_zone/factories.rb
 require 'solidus_payment_method_by_zone/factories'
 
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
+  eval("config.include #{ENV.fetch('FACTORY')}::Syntax::Methods")
 
   # Infer an example group's spec type from the file location.
   config.infer_spec_type_from_file_location!

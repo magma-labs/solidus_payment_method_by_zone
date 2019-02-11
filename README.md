@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/magma-labs/solidus_payment_method_by_zone.svg?branch=master)](https://travis-ci.org/magma-labs/solidus_payment_method_by_zone)
+
 # solidus_payment_method_by_zone
 Solidus extension to allow payment methods to be restricted by zones.
 
@@ -34,4 +36,4 @@ Simply add this require statement to your spec_helper:
 require 'solidus_payment_method_by_zone/factories'
 ```
 
-Copyright (c) 2019 [name of extension creator], released under the New BSD License
+Copyright (c) 2019 MagmaLabs, released under the New BSD License
