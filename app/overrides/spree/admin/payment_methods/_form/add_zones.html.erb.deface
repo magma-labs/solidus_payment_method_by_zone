@@ -1,0 +1,18 @@
+<!-- insert_bottom '[data-hook=payment_method]'-->
+<div class="row">
+  <div class="col-4">
+    <%= f.field_container :zones do %>
+      <%= f.label :zones, t('spree.admin.payment_method_zones') %>
+      <br>
+      <% payment_method_zones = f.object.zones.to_a %>
+      <% Spree::Zone.all.each do |zone| %>
+        <%= label_tag do %>
+          <%= check_box_tag('payment_method[zone_ids][]', zone.id, payment_method_zones.include?(zone)) %>
+          <%= zone.name %>
+        <% end %>
+        <br>
+      <% end %>
+      <%= error_message_on :shipping_method, :zone_id %>
+    <% end %>
+  </div>
+</div>
