@@ -1,7 +1,7 @@
 module SolidusPaymentMethodByZone
   class Engine < Rails::Engine
     require 'spree/core'
-    isolate_namespace Spree
+    isolate_namespace ::Spree
     engine_name 'solidus_payment_method_by_zone'
 
     # use rspec for tests

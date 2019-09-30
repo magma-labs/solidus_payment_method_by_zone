@@ -16,9 +16,8 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", 'LICENSE', 'Rakefile', 'README.md']
   s.test_files = Dir['test/**/*']
 
-  s.add_dependency 'solidus_core', ['>= 1.1', '< 3']
-  s.add_dependency 'solidus_support'
-  s.add_dependency 'deface', '~> 1.0'
+  s.add_runtime_dependency 'solidus_core', '>= 2.2'
+  s.add_runtime_dependency 'deface', '~> 1.0'
 
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'poltergeist'
@@ -28,8 +27,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'factory_bot'
   s.add_development_dependency 'ffaker'
   s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'rubocop', '0.49.0'
-  s.add_development_dependency 'rubocop-rspec', '1.4.0'
+  s.add_development_dependency 'rubocop'
+  s.add_development_dependency 'rubocop-rspec'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'sqlite3'
+  s.add_development_dependency 'selenium-webdriver'
+  s.add_development_dependency 'solidus_support'
 end

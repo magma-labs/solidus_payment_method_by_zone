@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/magma-labs/solidus_payment_method_by_zone.svg?branch=master)](https://travis-ci.org/magma-labs/solidus_payment_method_by_zone)
+[![CircleCI](https://circleci.com/gh/magma-labs/solidus_payment_method_by_zone/tree/master.svg?style=svg)](https://circleci.com/gh/magma-labs/solidus_payment_method_by_zone/tree/master)
 
 # solidus_payment_method_by_zone
 Solidus extension to allow payment methods to be restricted by zones.
