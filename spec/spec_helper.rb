@@ -23,7 +23,7 @@ end
 require File.expand_path('../dummy/config/environment.rb', __FILE__)
 
 require 'solidus_support'
-require 'solidus_support/extension/feature_helper'
+require 'solidus_dev_support/rspec/feature_helper'
 
 require 'capybara/rspec'
 
