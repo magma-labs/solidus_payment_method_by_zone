@@ -16,10 +16,10 @@ describe Spree::Order, type: :model do
     order.line_items << create(:line_item)
   end
 
-  describe "available_payment_methods" do
-    it "includes frontend payment methods" do
+  describe 'available_payment_methods' do
+    it 'includes frontend payment methods' do
       payment_method = Spree::PaymentMethod::Check.create!({
-        name: "Fake",
+        name: 'Fake',
         active: true,
         available_to_users: true,
         available_to_admin: false
@@ -27,7 +27,7 @@ describe Spree::Order, type: :model do
       expect(order.available_payment_methods).to include(payment_method)
     end
 
-    it "must not include payment methods for Mexico in addresses of US" do
+    it 'must not include payment methods for Mexico in addresses of US' do
       us_zone.members.create(zoneable: Spree::Country.find_by(iso: 'US'))
       us_payment_method.zones << us_zone
       mx_zone.members.create(zoneable: mx)
