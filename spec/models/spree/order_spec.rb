@@ -45,7 +45,21 @@ describe Spree::Order, type: :model do
         expect(order.available_payment_methods).to include(mx_payment_method)
       end
 
-      context 'with state zone' do
+      context 'with address matching more than one zone with same payment method' do
+        let(:ja_zone) { create(:zone) }
+
+        before do
+          ja_zone.members.create(zoneable: state)
+          mx_payment_method.payment_method_zones.create(zone: ja_zone)
+        end
+
+        it 'must include unique payment method' do
+          expect(order.available_payment_methods.count).to eq(1)
+        end
+
+        it 'must include mx payment method' do
+          expect(order.available_payment_methods).to include(mx_payment_method)
+        end
       end
     end
 

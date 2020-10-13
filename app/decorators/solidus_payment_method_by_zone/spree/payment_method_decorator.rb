@@ -12,7 +12,7 @@ module SolidusPaymentMethodByZone
         scope :available_to_address, ->(address) do
           left_joins(:payment_method_zones).where(spree_payment_method_zones: {
               zone_id: [nil] + ::Spree::Zone.for_address(address).pluck(:id)
-          })
+          }).distinct
         end
       end
     end
