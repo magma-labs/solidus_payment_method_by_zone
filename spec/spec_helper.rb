@@ -23,12 +23,9 @@ end
 require File.expand_path('../dummy/config/environment.rb', __FILE__)
 
 require 'solidus_support'
-require 'solidus_dev_support/rspec/feature_helper'
-
-require 'capybara/rspec'
 
 require 'spree/testing_support/controller_requests'
-require 'spree/testing_support/capybara_ext'
+require 'solidus_dev_support/rspec/feature_helper'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
