@@ -6,12 +6,11 @@ module SolidusPaymentMethodByZone
       extend ActiveSupport::Concern
 
       included do
-        has_many :payment_method_zones, dependent: :destroy
-        has_many :zones, through: :payment_method_zones
+        has_and_belongs_to_many :zones, join_table: 'spree_payment_method_zones'
 
         scope :available_to_address, ->(address) do
-          left_joins(:payment_method_zones).where(spree_payment_method_zones: {
-              zone_id: [nil] + ::Spree::Zone.for_address(address).pluck(:id)
+          left_joins(:zones).where(spree_zones: {
+              id: [nil] + ::Spree::Zone.for_address(address).pluck(:id)
           }).distinct
         end
       end

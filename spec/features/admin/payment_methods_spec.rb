@@ -6,12 +6,23 @@ describe 'Payment methods admin page', type: :feature, js: true do
   stub_authorization!
 
   context 'when create new payment method' do
+    let!(:mexico) { create(:zone, name: 'Mexico') }
+
     before do
       visit spree.new_admin_payment_method_path
     end
 
     it 'render correctly' do
       expect(page).to have_content(I18n.t('spree.new_payment_method'))
+    end
+
+    it 'succesful create payment method' do
+      fill_in 'Name', with: 'Test Payment Method'
+      within '#payment_method_zones_field' do
+        check 'Mexico'
+      end
+      click_on('Create')
+      expect(page).to have_content("successfully created!")
     end
   end
 end
