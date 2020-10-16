@@ -7,16 +7,14 @@ describe Spree::Order, type: :model do
   let(:usa) { Spree::Country.find_by(iso: 'US') }
   let(:us_zone) { create(:zone) }
   let(:mx_zone) { create(:zone) }
-  let(:us_payment_method) { create(:check_payment_method, name: 'US method') }
-  let(:mx_payment_method) { create(:check_payment_method, name: 'MX method') }
+  let!(:us_payment_method) { create(:check_payment_method, name: 'US method', zones: [us_zone]) }
+  let!(:mx_payment_method) { create(:check_payment_method, name: 'MX method', zones: [mx_zone]) }
   let(:order) { create(:order_with_totals) }
 
   before(:each) do
     order.line_items << create(:line_item)
     us_zone.members.create(zoneable: usa)
     mx_zone.members.create(zoneable: mx)
-    us_payment_method.payment_method_zones.create(zone: us_zone)
-    mx_payment_method.payment_method_zones.create(zone: mx_zone)
   end
 
   describe 'available_payment_methods' do
@@ -50,7 +48,8 @@ describe Spree::Order, type: :model do
 
         before do
           ja_zone.members.create(zoneable: state)
-          mx_payment_method.payment_method_zones.create(zone: ja_zone)
+          mx_payment_method.zones.push(ja_zone)
+          mx_payment_method.save
         end
 
         it 'must include unique payment method' do

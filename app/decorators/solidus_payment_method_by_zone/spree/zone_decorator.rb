@@ -6,8 +6,7 @@ module SolidusPaymentMethodByZone
       extend ActiveSupport::Concern
 
       included do
-        has_many :payment_method_zones, dependent: :destroy
-        has_many :payment_methods, through: :payment_method_zones
+        has_and_belongs_to_many :payment_methods, join_table: 'spree_payment_method_zones'
       end
 
     end
