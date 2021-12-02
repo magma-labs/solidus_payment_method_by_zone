@@ -1,6 +1,6 @@
 # frozen_string_literal: true
- 
-eval(ENV.fetch('FACTORY')).define do
+
+FactoryBot.define do
   factory :state_ja, class: 'Spree::State' do
     transient do
       country_iso { 'MX' }
@@ -10,7 +10,7 @@ eval(ENV.fetch('FACTORY')).define do
         carmen_country = Carmen::Country.coded(country.iso)
 
         carmen_country.subregions.coded(state_code) ||
-          carmen_country.subregions.sort_by(&:name).first ||
+          carmen_country.subregions.min_by(&:name) ||
           fail("Country #{country.iso} has no subregions")
       end
     end

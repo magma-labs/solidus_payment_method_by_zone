@@ -14,13 +14,13 @@ end
 ENV['RAILS_ENV'] = 'test'
 
 branch = ENV.fetch('SOLIDUS_BRANCH', 'master')
-if branch == 'master' || Gem::Version.new(branch[1..-1]) >= Gem::Version.new('2.5.0')
-  ENV['FACTORY'] = 'FactoryBot'
-else
-  ENV['FACTORY'] = 'FactoryGirl'
-end
+ENV['FACTORY'] = if branch == 'master' || Gem::Version.new(branch[1..-1]) >= Gem::Version.new('2.5.0')
+                   'FactoryBot'
+                 else
+                   'FactoryGirl'
+                 end
 
-require File.expand_path('../dummy/config/environment.rb', __FILE__)
+require File.expand_path('dummy/config/environment.rb', __dir__)
 
 require 'solidus_support'
 
@@ -29,7 +29,7 @@ require 'solidus_dev_support/rspec/feature_helper'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
+Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].sort.each { |f| require f }
 
 # Requires factories defined in lib/solidus_payment_method_by_zone/factories.rb
 load "#{File.dirname(__FILE__)}/../lib/solidus_payment_method_by_zone/factories.rb"

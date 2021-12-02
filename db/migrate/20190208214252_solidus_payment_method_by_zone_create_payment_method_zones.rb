@@ -3,6 +3,7 @@ class SolidusPaymentMethodByZoneCreatePaymentMethodZones < SolidusSupport::Migra
     create_table :spree_payment_method_zones do |t|
       t.references :zone
       t.references :payment_method
+      t.timestamps
     end
   end
 end

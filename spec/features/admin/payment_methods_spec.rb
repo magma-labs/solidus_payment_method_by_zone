@@ -19,7 +19,7 @@ describe 'Payment methods admin page', type: :feature, js: true do
     it 'succesful create payment method' do
       fill_in 'Name', with: 'Test Payment Method'
       within '#payment_method_zones_field' do
-        check 'Mexico'
+        check mexico.name
       end
       click_on('Create')
       expect(page).to have_content("successfully created!")
