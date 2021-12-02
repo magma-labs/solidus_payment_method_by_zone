@@ -8,9 +8,9 @@ branch = ENV.fetch('SOLIDUS_BRANCH', 'master')
 gem 'solidus', github: 'solidusio/solidus', branch: branch
 
 if ENV['DB'] == 'mysql'
-  gem 'mysql2', '~> 0.4.10'
+  gem 'mysql2'
 else
-  gem 'pg', '~> 0.21'
+  gem 'pg'
 end
 
 group :development, :test do
