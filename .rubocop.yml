@@ -36,3 +36,6 @@ Rails/CreateTableWithTimestamps:
 
 Layout/ArgumentAlignment:
   Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false
