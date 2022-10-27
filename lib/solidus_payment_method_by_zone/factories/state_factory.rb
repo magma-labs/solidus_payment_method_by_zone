@@ -10,7 +10,7 @@ FactoryBot.define do
         carmen_country = Carmen::Country.coded(country.iso)
 
         carmen_country.subregions.coded(state_code) ||
-          carmen_country.subregions.min_by(&:name).first ||
+          carmen_country.subregions.min_by(&:name) ||
           fail("Country #{country.iso} has no subregions")
       end
     end

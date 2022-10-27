@@ -9,7 +9,7 @@ module Spree
       base.scope :available_to_address, ->(address) do
         left_joins(:zones).where(
           spree_zones: {
-            id: [nil] + base.for_address(address).pluck(:id)
+            id: [nil] + ::Spree::Zone.for_address(address).pluck(:id)
           }
         ).distinct
       end

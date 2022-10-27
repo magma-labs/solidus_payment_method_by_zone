@@ -7,8 +7,8 @@ describe Spree::Order do
   let(:usa) { Spree::Country.find_by(iso: 'US') }
   let(:us_zone) { create(:zone) }
   let(:mx_zone) { create(:zone) }
-  let(:us_payment_method) { create(:check_payment_method, name: 'US method', zones: [us_zone]) }
-  let(:mx_payment_method) { create(:check_payment_method, name: 'MX method', zones: [mx_zone]) }
+  let!(:us_payment_method) { create(:check_payment_method, name: 'US method', zones: [us_zone]) }
+  let!(:mx_payment_method) { create(:check_payment_method, name: 'MX method', zones: [mx_zone]) }
   let(:order) { create(:order_with_totals) }
 
   before(:each) do
@@ -38,29 +38,29 @@ describe Spree::Order do
     context 'with mexican address' do
       let(:state) { create(:state_ja, country: mx) }
       let(:address) { create(:address, city: 'Leon', state: state) }
-      let(:order) { create(:order_with_totals, ship_address: address) }
+      let!(:order) { create(:order_with_totals, ship_address: address) }
 
       it 'must include mx payment method' do
         expect(order.available_payment_methods).not_to include(us_payment_method)
         expect(order.available_payment_methods).to include(mx_payment_method)
       end
-    end
 
-    context 'with address matching more than one zone with same payment method' do
-      let(:ja_zone) { create(:zone) }
+      context 'with address matching more than one zone with same payment method' do
+        let(:ja_zone) { create(:zone) }
 
-      before do
-        ja_zone.members.create(zoneable: state)
-        mx_payment_method.zones.push(ja_zone)
-        mx_payment_method.save
-      end
+        before do
+          ja_zone.members.create(zoneable: state)
+          mx_payment_method.zones.push(ja_zone)
+          mx_payment_method.save
+        end
 
-      it 'must include unique payment method' do
-        expect(order.available_payment_methods.count).to eq(1)
-      end
+        it 'must include unique payment method' do
+          expect(order.available_payment_methods.count).to eq(1)
+        end
 
-      it 'must include mx payment method' do
-        expect(order.available_payment_methods).to include(mx_payment_method)
+        it 'must include mx payment method' do
+          expect(order.available_payment_methods).to include(mx_payment_method)
+        end
       end
     end
 
@@ -68,7 +68,7 @@ describe Spree::Order do
       let(:ar) { create(:country, iso: 'AR') }
       let(:caba) { create(:state_ja, country: ar, state_code: 'C') }
       let(:address) { create(:address, city: 'Recoleta', state: caba) }
-      let(:order) { create(:order_with_totals, ship_address: address) }
+      let!(:order) { create(:order_with_totals, ship_address: address) }
 
       it 'must not return any payment method' do
         expect(order.available_payment_methods.count).to eq(0)
