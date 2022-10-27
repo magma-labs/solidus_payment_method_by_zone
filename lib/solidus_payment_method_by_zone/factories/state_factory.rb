@@ -1,6 +1,6 @@
 # frozen_string_literal: true
  
-eval(ENV.fetch('FACTORY')).define do
+FactoryBot.define do
   factory :state_ja, class: 'Spree::State' do
     transient do
       country_iso { 'MX' }

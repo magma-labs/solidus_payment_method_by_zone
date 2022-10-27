@@ -1,37 +1,43 @@
-# encoding: UTF-8
-$:.push File.expand_path('../lib', __FILE__)
-require 'solidus_payment_method_by_zone/version'
+# frozen_string_literal: true
+
+require_relative 'lib/solidus_payment_method_by_zone/version'
 
 Gem::Specification.new do |s|
-  s.name        = 'solidus_payment_method_by_zone'
-  s.version     = SolidusPaymentMethodByZone::VERSION
-  s.summary     = 'Solidus extension to allow payment methods by zones'
+  s.name = 'solidus_payment_method_by_zone'
+  s.version = SolidusPaymentMethodByZone::VERSION
+  s.authors = ['Magmalabs']
+  s.email = 'developers@magmalabs.io'
+
+  s.summary = 'Solidus extension to allow payment methods by zones'
   s.description = 'Solidus extension to allow payment methods to be restricted by zones'
-  s.license     = 'BSD-3-Clause'
+  s.homepage = 'http://github.com/magma-labs/solidus_payment_method_by_zone'
+  s.license = 'BSD-3-Clause'
 
-  s.author    = 'Magmalabs'
-  s.email     = 'developers@magmalabs.com'
-  s.homepage  = 'https://www.magmalabs.io'
+  if s.respond_to?(:metadata)
+    s.metadata['homepage_uri'] = s.homepage if s.homepage
+    s.metadata['source_code_uri'] = s.homepage if s.homepage
+    s.metadata['rubygems_mfa_required'] = 'true'
+  end
 
-  s.files = Dir["{app,config,db,lib}/**/*", 'LICENSE', 'Rakefile', 'README.md']
-  s.test_files = Dir['test/**/*']
+  s.required_ruby_version = Gem::Requirement.new('>= 2.5')
 
-  s.add_runtime_dependency 'solidus_core', '>= 2.2'
-  s.add_runtime_dependency 'deface', '~> 1.0'
+  # Specify which files should be added to the gem when it is released.
+  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
+  files = Dir.chdir(__dir__) { `git ls-files -z`.split("\x0") }
 
-  s.add_development_dependency 'capybara'
-  s.add_development_dependency 'poltergeist'
-  s.add_development_dependency 'coffee-rails'
-  s.add_development_dependency 'sass-rails'
-  s.add_development_dependency 'database_cleaner'
-  s.add_development_dependency 'factory_bot'
-  s.add_development_dependency 'ffaker'
-  s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'rubocop'
-  s.add_development_dependency 'rubocop-rspec'
-  s.add_development_dependency 'simplecov'
-  s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'selenium-webdriver'
-  s.add_development_dependency 'solidus_support'
-  s.add_development_dependency 'solidus_dev_support'
+  s.files = files.grep_v(%r{^(test|spec|features)/})
+  s.test_files = files.grep(%r{^(test|spec|features)/})
+  s.bindir = 'exe'
+  s.executables = files.grep(%r{^exe/}) { |f| File.basename(f) }
+  s.require_paths = ['lib']
+
+  solidus_version = ['>= 2.6', '< 4']
+
+  s.add_dependency 'solidus_core', solidus_version
+  s.add_dependency 'solidus_support', '~> 0.5'
+  s.add_dependency 'deface', '~> 1.0'
+
+  s.add_development_dependency 'solidus_backend', solidus_version
+  s.add_development_dependency 'solidus_dev_support', '~> 2.5'
+  s.add_development_dependency 'solidus_frontend', solidus_version
 end
