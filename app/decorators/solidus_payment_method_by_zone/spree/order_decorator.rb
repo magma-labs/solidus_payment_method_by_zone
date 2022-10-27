@@ -5,7 +5,8 @@ module Spree
     def self.prepended(base)
       base.class_eval do
         def available_payment_methods
-          @available_payment_methods ||= super.available_to_address(ship_address)
+          @available_payment_methods ||=
+            ::Spree::PaymentMethod.available_to_address(ship_address)
         end
       end
     end
