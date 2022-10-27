@@ -2,11 +2,11 @@
 
 require 'spec_helper'
 
-describe 'Payment methods admin page', type: :feature, js: true do
+describe 'Payment methods admin page', js: true do
   stub_authorization!
 
   context 'when create new payment method' do
-    let!(:mexico) { create(:zone, name: 'Mexico') }
+    let(:mexico) { create(:zone, name: 'Mexico') }
 
     before do
       visit spree.new_admin_payment_method_path

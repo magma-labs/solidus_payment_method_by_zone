@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SolidusPaymentMethodByZone
   module Generators
     class InstallGenerator < Rails::Generators::Base
@@ -22,7 +24,7 @@ module SolidusPaymentMethodByZone
         if run_migrations
           run 'bundle exec rake db:migrate'
         else
-          puts 'Skipping rake db:migrate, don\'t forget to run it!'
+          Rails.logger 'Skipping rake db:migrate, don\'t forget to run it!'
         end
       end
     end
