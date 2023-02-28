@@ -1,6 +1,11 @@
 # frozen_string_literal: true
+<<<<<<< Updated upstream
  
 eval(ENV.fetch('FACTORY')).define do
+=======
+
+FactoryBot.define do
+>>>>>>> Stashed changes
   factory :state_ja, class: 'Spree::State' do
     transient do
       country_iso { 'MX' }

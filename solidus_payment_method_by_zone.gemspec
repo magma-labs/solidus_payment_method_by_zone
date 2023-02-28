@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'solidus_core', '>= 2.2'
   s.add_runtime_dependency 'deface', '~> 1.0'
 
+<<<<<<< Updated upstream
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'poltergeist'
   s.add_development_dependency 'coffee-rails'
@@ -34,4 +35,21 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'selenium-webdriver'
   s.add_development_dependency 'solidus_support'
   s.add_development_dependency 'solidus_dev_support'
+=======
+  s.files = files.grep_v(%r{^(test|spec|features)/})
+  s.test_files = files.grep(%r{^(test|spec|features)/})
+  s.bindir = 'exe'
+  s.executables = files.grep(%r{^exe/}) { |f| File.basename(f) }
+  s.require_paths = ['lib']
+
+  solidus_version = ['>= 2.6', '< 4']
+
+  s.add_dependency 'deface', '~> 1.0'
+  s.add_dependency 'solidus_core', solidus_version
+  s.add_dependency 'solidus_support', '~> 0.5'
+
+  s.add_development_dependency 'solidus_backend', solidus_version
+  s.add_development_dependency 'solidus_dev_support', '~> 2.5'
+  s.add_development_dependency 'solidus_frontend', solidus_version
+>>>>>>> Stashed changes
 end
